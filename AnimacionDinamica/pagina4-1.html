@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Pagina 4</title>
+  <style>
+      canvas{
+          border: 3px solid rgb(73, 42, 165);
+          background-color: rgb(254, 225, 254);
+      }
+  </style>
+
+<script>
+    //window.onload=function(){}
+     var x=Math.random() * 800;
+     var y=Math.random() * 600;
+     var x1=0;
+     var dx1=4;
+     var y1=0;
+     var dy1=4;
+
+     var x2=25;
+     var dx2=6;
+     var y2=25;
+     var dy2=6
+
+     var x3=3;
+     var dx3=5;
+     var y3=3;
+     var dy3=5;
+
+    function animate(){
+        requestAnimationFrame(animate);
+        console.log('animando');
+          var canvas = document.getElementById("micanvas");
+          var context = canvas.getContext("2d");
+          context.clearRect(0, 0, innerWidth, innerHeight);
+          context.fillStyle="pink"
+          context.fillRect(x1,y1,100,100);
+
+           if (x1 > 850 || x1 < 0){
+                dx1= -dx1;
+            }
+           x1+=dx1;
+           if (y1 > 620 || y1 < 0){
+                dy1= -dy1;
+            }
+           y1+=dy1;
+
+          context.fillStyle="rgba(143, 141, 242, 0.8)"
+          context.fillRect(x2,y2,150,110);
+           if (x2 > 850 || x2 < 0){
+                dx2= -dx2;
+            }
+           x2+=dx2;
+           if (y2 > 620 || y2 < 0){
+                dy2= -dy2;
+            }
+           y2+=dy2;
+
+            context.font = '40pt Verdana';
+            context.fillStyle = 'black';
+            context.fillText('¿Estás cuadrando?', x3, y3);
+            
+           if (x3 > 500 || x3 < 0){
+                dx3= -dx3;
+            }
+           x3+=dx3;
+           if (y3 > 700 || y3 < 0){
+                dy3= -dy3;
+            }
+           y3+=dy3;
+
+    }
+    animate();
+</script>
+
+  </head>
+<body>
+   <canvas id="micanvas" width="1000" height="720"></canvas>
+</body>
+</html>
