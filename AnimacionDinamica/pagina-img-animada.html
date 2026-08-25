@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>Pagina imagen animada</title>
+   <style>
+    body{
+        text-align: center;
+    }
+    canvas{
+        border: 2px solid #5e5e5e;
+        background-color: rgba(198, 255, 207, 0.829);
+    }
+    </style>
+    <script>
+        var x=Math.random() * 650;
+        var y=Math.random() * 600;
+        var dx=4;
+        var dy=4;
+        var imagen= new Image();
+        imagen.src = "Janini.png"; 
+
+        function animate(){    
+            requestAnimationFrame(animate);
+            var canvas = document.getElementById("micanvas");
+            var context = canvas.getContext("2d");
+            context.clearRect(0, 0, innerWidth, innerHeight);
+            context.drawImage(imagen, x, y, 140, 140); 
+           // Rebote horizontal
+            if (x + 130 >= canvas.width || x <= 0){
+                 dx = -dx;
+                 
+}
+
+            // Rebote vertical
+        if (y + 130 >= canvas.height || y <= 0){
+       dy = -dy;
+}
+
+// Movimiento
+x += dx;
+y += dy;
+        }
+        animate();
+    </script>
+</head>
+<body>
+    <canvas id="micanvas" width="1500" height="730"></canvas>
+</body>
+</html>
