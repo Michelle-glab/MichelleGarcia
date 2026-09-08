@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Canva Interactivo</title>
+    <style>
+      body { 
+       
+        background-color:rgb(90, 92, 210);
+        text-align: center;
+        
+        
+      }
+      canvas {
+        background-color:rgb(165, 190, 250);
+      }
+
+      aside {
+         color:rgb(205, 235, 255);
+      }
+
+    </style>
+
+      <style>
+        body { 
+        font-family:"Georgia", system-ui;
+        font-weight: 300;
+        font-style: normal;
+        }
+      </style>
+
+  </head>
+  <body>
+    <canvas id="canvas" width="1000" height="700"></canvas>
+    <aside>Presiona entre las teclas ABCD  y espacio para cambiar, flechas para moverte.</aside>
+    
+    
+    <script src="keycodes.js"></script>
+    <script>
+    window.onload = function () {
+      var canvas = document.getElementById("canvas");
+      var context = canvas.getContext("2d");
+      var x = 200;
+      var y = 200;
+
+      var dx=5;
+      var dy=5;
+
+      context.font = '40pt Arial';
+      context.fillStyle = 'White';
+      context.fillText('Hi fih!', x+230, y-50); //<== para poner texto en el canvas
+
+      var imagen= new Image(); // variable para guardar la imagen
+      imagen.src = "Fish1.jpg"; // fuente de donde toma la imagen
+
+      var imagen2= new Image(); // variable para guardar la imagen
+      imagen2.src = "Fish2.jpg";
+
+      var imagen3= new Image(); // variable para guardar la imagen
+      imagen3.src = "Fish3.jpg";
+
+      var imagen4= new Image(); // variable para guardar la imagen
+      imagen4.src = "Fish4.jpg";
+
+      var imagen5= new Image(); // variable para guardar la imagen
+      imagen5.src = "Fish5.jpg";
+
+      imagen.onload = function(){
+        context.drawImage(imagen, x+90, y+50, 400, 400); //<== para poner imagen en el canvas
+
+      };
+
+
+
+      function onKeyboardEvent (event) {
+        switch (event.keyCode) {
+        case 38:
+          console.log("up!");
+          context.clearRect(0, 0, innerWidth, innerHeight);
+          if (y > 600 || y < 0){
+              dy= -dy;
+          }
+          y-=dy;
+          context.fillRect(x, y, 100, 100);
+          break;
+        case 40:
+          console.log("down!");
+          context.clearRect(0, 0, innerWidth, innerHeight);
+            if (y > 600 || y < 0){
+              dy= -dy;
+          }
+          y+=dy;
+          context.fillRect(x, y, 100, 100);
+          break;
+        case 37:
+          console.log("left!");
+          context.clearRect(0, 0, innerWidth, innerHeight);
+            if (x > 900 || x < 0){
+              dx= -dx;
+          }
+          x-=dx;
+        
+          context.fillRect(x, y, 100, 100);
+          break;
+        case 39:
+          console.log("right!");
+          context.clearRect(0, 0, innerWidth, innerHeight);
+            if (x > 900 || x < 0){
+              dx= -dx;
+          }
+          x+=dx;
+          
+          context.fillRect(x, y, 100, 100);
+          break;
+        case keycode.SPACE:
+          console.log("jump!");
+          context.clearRect(0, 0, innerWidth, innerHeight);
+          context.fillText('...', x, y);
+          context.drawImage(imagen5, x+90, y+50, 400, 400);
+          break;
+        
+        case keycode.A:
+          console.log("Letra A!");
+          context.clearRect(0, 0, innerWidth, innerHeight);
+          context.fillText('Fih what?', x, y);
+          context.drawImage(imagen, x+90, y+50, 400, 400);
+          break;
+        case keycode.D:
+          console.log("Letra D!");
+          context.clearRect(0, 0, innerWidth, innerHeight);
+          context.fillText('bubble noises', x, y);
+          context.drawImage(imagen4, x+90, y+50, 400, 400);
+          break;
+        case keycode.B:
+          console.log("Letra B!");
+          context.clearRect(0, 0, innerWidth, innerHeight);
+          context.fillText('Hi fish!', x, y);
+          context.drawImage(imagen2, x+90, y+50, 400, 400);
+          break;
+        case keycode.C:
+          console.log("Letra C!");
+          context.clearRect(0, 0, innerWidth, innerHeight);
+          context.fillText('glu glu glu', x, y);
+          context.drawImage(imagen3, x+90, y+50, 400, 400);
+          break;
+
+        default:
+          console.log(event.keyCode);
+        }
+      }
+
+      function animate(){
+       requestAnimationFrame(animate);
+        console.log('animando');
+        var canvas = document.getElementById("micanvas");
+        var context = canvas.getContext("2d");
+        context.clearRect(0, 0, innerWidth, innerHeight);
+
+        
+      }
+      
+
+      window.addEventListener('keydown', onKeyboardEvent, false);
+    };
+    </script>
+  </body>
+</html>
