@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>App Dibujo</title>
+    <style>
+      body {
+        background-color: lightgoldenrodyellow;
+        background-image: url("TallerPinturas.jpg");
+        background-size: cover;
+        text-align: center;
+      }
+
+      canvas {
+        border: 6px solid rgb(244, 196, 91);
+        border-radius: 4px;
+        background-color: rgb(215, 255, 248);
+      }
+
+      aside {
+        color: darkcyan;
+        font: 15px verdana;
+        font-style: bold;
+      }
+
+       .colores {
+        width: 100%;
+        height: 50px;
+        text-align: center;
+      }
+
+      .colores button {
+        width: 100px;
+        height: 50px;
+        border-radius: 4px;
+        margin-right: 5px;
+        margin-top: 5px;
+        border: 1px solid white;
+        cursor: pointer;
+      }
+
+      #black {
+        background: black;
+      }
+
+      #lightblue {
+        background: #add8e6;
+      }
+
+      #mediumpurple {
+        background: #9370d8;
+      }
+
+      #mediumspringgreen {
+        background: #00fa9a;
+      }
+
+      #pink {
+        background: #ffc0cb;
+      }
+
+.color button:hover{
+        opacity:0.5;
+      }
+
+.grosor {
+        width: 100%;
+        height: 50px;
+        text-align: center;
+      }
+
+      .grosor button {
+        width: 100px;
+        height: 50px;
+        border-radius: 4px;
+        margin-right: 5px;
+        margin-top: 5px;
+        background: #ffffff;
+        border: 1px solid black;
+        cursor: pointer;
+        font: 15px verdana;
+      }
+
+      #otros {
+        width: 100%;
+        height: 60px;
+        text-align: center;
+      }
+
+#otros button {
+        width: 100px;
+        height: 40px;
+        background: #ffffff;
+        color: black;
+        font: 15px verdana;
+        cursor: pointer;
+        margin-top: 15px;
+      }
+
+      #otros button:hover{
+        opacity:0.5;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="colores">
+      <button id="black" type="button" value="#000000"></button>
+      <button id="mediumpurple" type="button" value="#9370d8"></button>
+      <button id="mediumspringgreen" type="button" value="#00fa9a"></button>
+      <button id="pink" type="button" value="#ffc0cb"></button>
+      <button id="lightblue" type="button" value="#add8e6"></button>
+    </div>
+
+<div id="otros">
+  <button id="clearCanvas" type="button">Clear</button>
+</div>
+
+<div class="grosor">
+  <button id="grosor1" type="button" value="1">1 px</button>
+  <button id="grosor3" type="button" value="3">3 px</button>
+  <button id="grosor5" type="button" value="5">5 px</button>
+  <button id="grosor5" type="button" value="50">50 px</button>
+</div>
+
+    <canvas id="canvas" width="800" height="500"></canvas>
+    <aside>Presiona el mouse para dibujar</aside>
+    
+    <script src="utils.js"></script>
+    <script>
+    window.onload = function () {
+      var canvas = document.getElementById('canvas'),
+          context = canvas.getContext('2d'),
+          mouse = utils.captureMouse(canvas);
+
+      canvas.addEventListener('mousedown', function () {
+        context.beginPath();
+        context.moveTo(mouse.x, mouse.y);
+        canvas.addEventListener('mousemove', onMouseMove, false);
+      }, false);
+
+      canvas.addEventListener('mouseup', function () {
+        canvas.removeEventListener('mousemove', onMouseMove, false);
+      }, false);
+
+      function onMouseMove () {
+        context.lineTo(mouse.x, mouse.y);
+        context.stroke();
+      }
+
+      var colores = document.getElementsByClassName('colores')[0];
+      colores.addEventListener('click', function(event) {
+        context.strokeStyle = event.target.value;
+      });
+
+       var grosor = document.getElementsByClassName('grosor')[0];
+      grosor.addEventListener('click', function(event) {
+        context.lineWidth = event.target.value;
+      });
+
+       var clearButton = document.getElementById('clearCanvas');
+         clearButton.addEventListener('click', function() {
+         context.clearRect(0, 0, canvas.width, canvas.height);
+        });
+
+    };
+    </script>
+  </body>
+</html>
