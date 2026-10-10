@@ -13,7 +13,7 @@
       }
 
         canvas { 
-            background-image: url("Reloj.PNG");
+            
             background-repeat: no-repeat;
         }
     </style>
@@ -40,10 +40,13 @@
           var radianes=0;
           var radianes2=5;
           var radianes3=10;
+          var fondo = new Image();
+          fondo.src = "Reloj.png";
 
       (function drawFrame () {
         window.requestAnimationFrame(drawFrame, canvas);
         context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(fondo, 0, 0, canvas.width, canvas.height);
         context.save();
         context.translate(300, 300);
         radianes += vr1 * Math.PI / 90; //to radians
@@ -64,6 +67,10 @@
         context.rotate(radianes3); //radians
         context.drawImage(segundos, -segundos.width/2,-segundos.height/2);
         context.restore();
+
+        fondo.onload = function() {
+        drawFrame();
+      };
       
       }());
     };
