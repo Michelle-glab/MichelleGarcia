@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Rotational Velocity</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        body {
+        background-image: url("Bosque.jpg");
+        background-size: cover;
+        text-align: center;
+      }
+
+        canvas { 
+            background-image: url("Reloj.PNG");
+            background-repeat: no-repeat;
+        }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+
+    <script src="utils.js"></script>
+    <script src="./classes/arrow.js"></script>
+    <script>
+    window.onload = function () {
+      var canvas = document.getElementById('canvas');
+          context = canvas.getContext('2d');
+          //arrow = new Arrow(),
+          var vr1 = .1; //degrees
+          var vr2 = .5;
+          var vr3 = 3;
+          var hora = new Image();
+          var minutos = new Image();
+          var segundos = new Image();
+          hora.src = "Liebre.png";
+          minutos.src = "Meta.png";
+          segundos.src = "Tortuga.png";
+          var radianes=0;
+          var radianes2=5;
+          var radianes3=10;
+
+      (function drawFrame () {
+        window.requestAnimationFrame(drawFrame, canvas);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.save();
+        context.translate(300, 300);
+        radianes += vr1 * Math.PI / 90; //to radians
+        context.rotate(radianes); //radians
+        context.drawImage(hora, -hora.width/2,-hora.height/2);
+        context.restore();
+
+        context.save();
+        context.translate(300, 300);
+        radianes2 += vr2 * Math.PI / 180; //to radians
+        context.rotate(radianes2); //radians
+        context.drawImage(minutos, -minutos.width/2,-minutos.height/2);
+        context.restore();
+
+        context.save();
+        context.translate(300, 300);
+        radianes3 += vr3 * Math.PI / 270; //to radians
+        context.rotate(radianes3); //radians
+        context.drawImage(segundos, -segundos.width/2,-segundos.height/2);
+        context.restore();
+      
+      }());
+    };
+    </script>
+  </body>
+</html>
