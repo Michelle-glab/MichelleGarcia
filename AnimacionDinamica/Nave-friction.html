@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Nave en movimiento</title>
+  <style>
+
+ body {
+  background-image: url("FondoCielo.png");
+        text-align: center;
+      }
+
+    #canvas {
+      background-image: url("FondoCielo.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+     aside {
+        color: rgb(130, 80, 210);
+        font: 15px verdana;
+        font-style: bold;
+        margin-top: 55px;
+      }
+
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="710" height="464"></canvas>
+  <aside>Usa las flechas izq/der para posicionar la nave, arriba para propulsar</aside>
+
+  <script src="utils.js"></script>
+  <script src="nave.js"></script> 
+  <script>
+  window.onload = function () {
+    var canvas = document.getElementById('canvas'),
+        context = canvas.getContext('2d'),
+        ship = new Alien(),
+        vr = 0, vx = 0, vy = 0,
+        thrust = 0,
+        friction = 0.98;
+
+    ship.x = canvas.width / 2;
+    ship.y = canvas.height / 2;
+
+    
+    window.addEventListener('keydown', function (event) {
+      switch (event.keyCode) {
+        case 37: vr = -3; break; // izquierda
+        case 39: vr = 3; break;  // derecha
+        case 38: thrust = 0.05; ship.showFlame = true; break; // arriba
+      }
+    }, false);
+
+    window.addEventListener('keyup', function () {
+      vr = 0;
+      thrust = 0;
+      ship.showFlame = false;
+    }, false);
+
+    function drawFrame() {
+      requestAnimationFrame(drawFrame);
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      ship.rotation += vr * Math.PI / 180;
+      var angle = ship.rotation,
+          ax = Math.cos(angle - Math.PI / 2) * thrust,
+          ay = Math.sin(angle - Math.PI / 2) * thrust;
+
+      vx += ax; vy += ay;
+      vx *= friction; vy *= friction;
+      ship.x += vx; ship.y += vy;
+
+      
+      if (ship.x < 0) { ship.x = 0; vx = -vx; }
+      if (ship.x > canvas.width) { ship.x = canvas.width; vx = -vx; }
+      if (ship.y < 0) { ship.y = 0; vy = -vy; }
+      if (ship.y > canvas.height) { ship.y = canvas.height; vy = -vy; }
+
+      ship.draw(context);
+    }
+
+    drawFrame();
+  };
+  </script>
+</body>
+</html>
